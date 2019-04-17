@@ -5,9 +5,11 @@ dump.json
 .classpath
 .vscode
 
-/.idea
+**/out
+**/.idea
 *.iml
 .idea_modules
+**/*.class
 
 .metadata
 bin/

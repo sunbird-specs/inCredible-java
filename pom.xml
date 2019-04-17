@@ -5,13 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.incredible</groupId>
-    <artifactId>pojos</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>incredible-java</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>POJOs for the inCredible spec v1.0</description>
+    <packaging>pom</packaging>
+    <description>POJOs and utilities for the inCredible spec v1.0</description>
+    <modules>
+        <module>utils</module>
+        <module>pojos</module>
+    </modules>
 
     <properties>
         <jackson.version>2.8.9</jackson.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
@@ -27,24 +34,4 @@
             <version>${jackson.version}</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <!--<configuration>-->
-                    <!--<finalName>pojos</finalName>-->
-                <!--</configuration>-->
-            </plugin>
-        </plugins>
-    </build>
 </project>
