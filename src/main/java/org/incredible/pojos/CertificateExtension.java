@@ -32,7 +32,7 @@ public class CertificateExtension extends Assertion {
     private String validFrom;
 
     /**
-     * TODO: LinkedDataSignature
+     * The signature value (hash typically generated using private key)
      */
     private String signature;
 

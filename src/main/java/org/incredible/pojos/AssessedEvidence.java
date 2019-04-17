@@ -24,7 +24,9 @@ public class AssessedEvidence extends Evidence {
      */
     private Date assessedOn;
 
-    // TODO: Check
+    /**
+     * Signature value typically a hash generated using private key of the assessedBy
+     */
     private String signature;
 
     public AssessedEvidence() {

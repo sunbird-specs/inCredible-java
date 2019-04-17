@@ -18,8 +18,7 @@ public class OBBase {
     /**
      * A claim made about this entity.
      */
-    // TODO : Endorsement
-    //private Endorsement endorsement;
+    private Endorsement endorsement;
 
     public String[] getRelated() {
         return related;
@@ -37,11 +36,11 @@ public class OBBase {
         this.version = version;
     }
 
-//    public Endorsement getEndorsement() {
-//        return endorsement;
-//    }
-//
-//    public void setEndorsement(Endorsement endorsement) {
-//        this.endorsement = endorsement;
-//    }
+    public Endorsement getEndorsement() {
+        return endorsement;
+    }
+
+    public void setEndorsement(Endorsement endorsement) {
+        this.endorsement = endorsement;
+    }
 }
