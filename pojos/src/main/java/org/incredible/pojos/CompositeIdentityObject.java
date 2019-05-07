@@ -1,5 +1,7 @@
 package org.incredible.pojos;
 
+import org.incredible.pojos.ob.IdentityObject;
+
 import java.util.List;
 
 public class CompositeIdentityObject extends IdentityObject {

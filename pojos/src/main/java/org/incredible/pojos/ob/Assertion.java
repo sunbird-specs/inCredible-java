@@ -1,5 +1,7 @@
-package org.incredible.pojos;
+package org.incredible.pojos.ob;
 
+
+import org.incredible.pojos.CompositeIdentityObject;
 
 /**
  * Exactly per OpenBadges v2 specification

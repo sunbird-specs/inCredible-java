@@ -1,5 +1,7 @@
 package org.incredible.pojos;
 
+import org.incredible.pojos.ob.Evidence;
+
 import java.util.Date;
 
 public class AssessedEvidence extends Evidence {

@@ -1,5 +1,7 @@
 package org.incredible.pojos;
 
+import org.incredible.pojos.ob.Evidence;
+
 public class TrainingEvidence extends Evidence {
     private String subject;
 

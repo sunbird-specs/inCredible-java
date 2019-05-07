@@ -1,4 +1,4 @@
-package org.incredible.pojos;
+package org.incredible.pojos.ob;
 
 public class BadgeClass extends OBBase {
     /**
@@ -33,7 +33,10 @@ public class BadgeClass extends OBBase {
 
     private Criteria criteria;
 
-    private Profile issuer;
+    /**
+     * HTTP URL to the issuer of this credential - Profile
+     */
+    private String issuer;
 
     private AlignmentObject alignment;
 }

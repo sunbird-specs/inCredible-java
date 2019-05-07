@@ -1,4 +1,4 @@
-package org.incredible.pojos;
+package org.incredible.pojos.ob;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package org.incredible.pojos;
+package org.incredible.pojos.ob;
 
 public class AlignmentObject {
     /**

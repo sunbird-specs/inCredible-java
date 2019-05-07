@@ -1,4 +1,4 @@
-package org.incredible.pojos;
+package org.incredible.pojos.ob;
 
 /**
  * Common properties that are applicable to several classes of the OpenBadges

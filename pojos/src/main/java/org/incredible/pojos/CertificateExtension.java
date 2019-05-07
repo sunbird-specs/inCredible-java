@@ -2,6 +2,7 @@ package org.incredible.pojos;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.incredible.pojos.ob.Assertion;
 
 /**
  * An extension to Assertion class

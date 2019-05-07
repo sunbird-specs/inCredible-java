@@ -1,5 +1,8 @@
 package org.incredible.pojos;
 
+import org.incredible.pojos.ob.CryptographicKey;
+import org.incredible.pojos.ob.IdentityObject;
+
 public class SignatoryExtension extends IdentityObject {
     /**
      * Designation or capacity of the signatory
