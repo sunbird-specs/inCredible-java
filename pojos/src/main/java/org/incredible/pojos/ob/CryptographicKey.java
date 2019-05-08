@@ -3,7 +3,7 @@ package org.incredible.pojos.ob;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class CryptographicKey {
+public class CryptographicKey extends OBBase {
     private static final ObjectMapper mapper = new ObjectMapper();
     private String[] type = new String[]{"CryptographicKey"};
     private String id;

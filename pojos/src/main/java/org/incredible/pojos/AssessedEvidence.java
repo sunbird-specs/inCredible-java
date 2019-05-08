@@ -13,7 +13,7 @@ public class AssessedEvidence extends Evidence {
     /**
      * Assessment conducted which elicited the evidence
      */
-    private String assessment;
+    private Assessment assessment;
 
     /**
      * HTTP URL identifier to a JSON-LD object or an embedded profile of the
@@ -44,11 +44,11 @@ public class AssessedEvidence extends Evidence {
         this.subject = subject;
     }
 
-    public String getAssessment() {
+    public Assessment getAssessment() {
         return assessment;
     }
 
-    public void setAssessment(String assessment) {
+    public void setAssessment(Assessment assessment) {
         this.assessment = assessment;
     }
 

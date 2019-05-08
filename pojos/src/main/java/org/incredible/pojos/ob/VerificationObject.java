@@ -2,7 +2,7 @@ package org.incredible.pojos.ob;
 
 import java.util.List;
 
-public class VerificationObject {
+public class VerificationObject extends OBBase {
     /**
      * The type of verification method. Supported values for single assertion verification are HostedBadge and
      * SignedBadge (aliases in context are available: hosted and signed)

@@ -1,0 +1,11 @@
+{
+  "type": "AwardingBody",
+  "id": "https://certs.example.gov/o/dgt/HJ5327VB1247G",
+  "name": "Ministry of Skill Development and Entrepreneurship, Directorate General of Training",
+  "publicKey": {
+    "id": "https://dgt.example.gov.in/keys/awarding_body.json",
+    "type": "Key",
+    "owner": "https://certs.example.gov/o/dgt/HJ5327VB1247G",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\n... ... ... ... ...\n-----END PUBLIC KEY-----\n"
+  }
+}

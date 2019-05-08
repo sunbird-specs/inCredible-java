@@ -1,8 +1,12 @@
 package my.sample;
 
+import org.incredible.pojos.AssessedEvidence;
 import org.incredible.pojos.CertificateExtension;
 import org.incredible.pojos.CompositeIdentityObject;
 
+import org.incredible.pojos.ob.BadgeClass;
+import org.incredible.pojos.ob.Criteria;
+import org.incredible.pojos.ob.Evidence;
 import org.incredible.utils.EncryptionHelper;
 import org.incredible.utils.KeyGenerator;
 import org.incredible.utils.SignatureHelper;
@@ -12,7 +16,11 @@ import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * A demonstration of how inCredible specification can be realized
@@ -99,16 +107,65 @@ public class Main {
         }
     }
 
+    private static CompositeIdentityObject buildRecipient() {
+        CompositeIdentityObject recipient = new CompositeIdentityObject();
+        recipient.setType(new String[]{"urn"});
+        recipient.setHashed(false);
+        recipient.setIdentity("urn:in.gov.gstn.id:Z000000000000001");
+        recipient.setName("Government Industrial Training Institute, Salboni");
+        return recipient;
+    }
+
+    private static BadgeClass buildBadge() {
+        BadgeClass badgeClass = new BadgeClass();
+        badgeClass.setId("https://dgt.example.gov.in/certs/iti/grading/appreciate");
+        badgeClass.setName("Certificate of Appreciation");
+        badgeClass.setDescription("Certificate of Appreciation in National Level ITI Grading");
+        badgeClass.setImage("data:image/png;base64,<base64-encoded-png-data>");
+
+        Criteria criteria = new Criteria();
+        criteria.setNarrative("For exhibiting outstanding performance");
+
+        badgeClass.setCriteria(criteria);
+        badgeClass.setIssuer("https://certs.example.gov/o/dgt/HJ5327VB1247G");
+        return badgeClass;
+    }
+
     public static void main(String[] args) {
         initializeKeys();
         initSignatureHelper();
 
         CertificateExtension certificate = new CertificateExtension();
-        CompositeIdentityObject recipient = new CompositeIdentityObject();
+        certificate.setId("tag:msde.gov.in,2015-02-27:dgt.certificate/1800122349");
+
+        certificate.setRecipient(buildRecipient());
+        certificate.setBadge(buildBadge());
+
+        // Set date limits
+        String nowDt = Instant.now().toString();
+        certificate.setIssuedOn(Instant.now().toString());
+
+        SimpleDateFormat dateFormatGmt = new SimpleDateFormat("yyyy-MM-dd");
+        certificate.setValidFrom(dateFormatGmt.format(Date.from(Instant.now())));
+
+        // The certificate is set to expire after 2 years.
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, 2);
+        certificate.setExpires(dateFormatGmt.format(calendar.getTime()));
+
+        AssessedEvidence evidence = new AssessedEvidence();
+        evidence.setId("urn:uuid:02644c88-d2b7-41ef-a78c-6adf7fbdb268");
+        evidence.setDescription("Rank in National ITI Grading");
+
+
+        // TODO - set assessment and signature.
+        //evidence.setAssessment();
+
+        certificate.setEvidence(evidence);
+
 
         certificate.setAwardedThrough("PMKYY");
-        String nowDt = Instant.now().toString();
-        certificate.setValidFrom(nowDt);
+
         certificate.setExpires(null);
         certificate.setId("http://mydomain/certs/1");
         certificate.setIssuedOn(nowDt);

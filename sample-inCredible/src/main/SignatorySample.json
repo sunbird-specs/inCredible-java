@@ -1,0 +1,10 @@
+{
+  "type": [
+    "urn",
+    "Extension",
+    "SignatoryExtension"
+  ],
+  "name": "<Name of signatory>",
+  "identity": "urn:in.gov.msde.dgt-employee-id:GITI2D37A483ADJ452",
+  "designation": "Director General (Training)"
+}

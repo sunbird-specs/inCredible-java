@@ -1,6 +1,6 @@
 package org.incredible.pojos.ob;
 
-public class Endorsement {
+public class Endorsement extends OBBase {
     /**
      * Unique IRI for the Endorsement instance.
      * If using hosted verification, this should be the URI where the assertion of endorsement is accessible.

@@ -1,6 +1,6 @@
 package org.incredible.pojos.ob;
 
-public class Criteria {
+public class Criteria extends OBBase {
     /**
      * Type of the criteria, defaults to "Criteria"
      */

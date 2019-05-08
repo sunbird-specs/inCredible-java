@@ -11,6 +11,7 @@ utils
 
 sample-inCredible
 - Example code to demonstrate usage of pojos and utils above
+- Also, has CertificateSample.json, IssuerSample.json and SignatureSample.json
 
 ## Installation
 To build the pojos and utilities

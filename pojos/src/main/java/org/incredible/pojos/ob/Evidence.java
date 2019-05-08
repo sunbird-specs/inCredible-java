@@ -1,8 +1,7 @@
 package org.incredible.pojos.ob;
 
-import java.util.List;
 
-public class Evidence {
+public class Evidence extends OBBase {
     /**
      * identifies the evidence from the urn:uuid namespace or a HTTP URL of a
      * webpage which presents the evidence

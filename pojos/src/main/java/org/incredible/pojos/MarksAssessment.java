@@ -15,4 +15,28 @@ public class MarksAssessment extends Assessment {
      * Actual score achieved
      */
     private float passValue;
+
+    public float getMinValue() {
+        return minValue;
+    }
+
+    public void setMinValue(float minValue) {
+        this.minValue = minValue;
+    }
+
+    public float getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(float maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public float getPassValue() {
+        return passValue;
+    }
+
+    public void setPassValue(float passValue) {
+        this.passValue = passValue;
+    }
 }

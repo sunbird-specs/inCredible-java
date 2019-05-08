@@ -1,6 +1,6 @@
 package org.incredible.pojos.ob;
 
-public class AlignmentObject {
+public class AlignmentObject extends OBBase {
     /**
      * Name of the alignment
      */
