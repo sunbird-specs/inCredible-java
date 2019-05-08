@@ -24,10 +24,7 @@ public class EncryptionHelper {
     }
 
     public EncryptionHelper() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
-        KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-        keyGen.initialize(2048);
-        key = keyGen.generateKeyPair();
-
+        // https://docs.oracle.com/javase/8/docs/api/javax/crypto/Cipher.html
         // Creates an RSA Cipher object (specifying the algorithm, mode, and padding).
         cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
 
