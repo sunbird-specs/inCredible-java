@@ -1,17 +1,14 @@
 package my.sample;
 
-import org.incredible.pojos.AssessedEvidence;
 import org.incredible.pojos.CertificateExtension;
-import org.incredible.pojos.CompositeIdentityObject;
 
-import org.incredible.pojos.ob.BadgeClass;
-import org.incredible.pojos.ob.Criteria;
-import org.incredible.pojos.ob.Evidence;
-import org.incredible.utils.EncryptionHelper;
+import org.incredible.pojos.ob.SignedVerification;
 import org.incredible.utils.KeyGenerator;
 import org.incredible.utils.SignatureHelper;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
@@ -20,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 /**
  * A demonstration of how inCredible specification can be realized
@@ -58,14 +54,38 @@ public class Main {
     private static KeyPair keyPair;
 
     /**
+     * The context json file - for JSON-LD signing and machine-readability.
+     */
+    private static final String CONTEXT_FILE_NAME = "v1/context.json";
+
+    /**
+     * Contents of the CONTEXT_FILE_NAME
+     */
+    private static String context;
+
+    /**
+     * The domain that holds the contexts for public consumption
+     */
+    private static final String DOMAIN = "http://localhost:8080";
+
+    /**
      * Signature helper
      */
     private static SignatureHelper signatureHelper;
+
+    /**
+     * Sample builders
+     */
+    private static SampleBuilders sampleBuilders;
 
     private static KeyPair generateKeys() throws NoSuchAlgorithmException {
         KeyGenerator keyGenerator = new KeyGenerator(RSA_ALGO, 2048);
         keyPair = keyGenerator.get();
         return keyPair;
+    }
+
+    private String getPublicKey() throws IOException {
+        return new KeyWriter().getPublicKey(keyPair.getPublic());
     }
 
     private static void initializeKeys() {
@@ -79,7 +99,6 @@ public class Main {
                 // Write it in current directory for next time
                 new KeyWriter().write(keyPair, WORK_DIR);
             }
-            System.out.println(keyPair.getPrivate().getFormat());
         } catch (NoSuchAlgorithmException algoException) {
             System.out.println("No such algorithm. Refer https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html");
         } catch (IOException ioException) {
@@ -95,52 +114,68 @@ public class Main {
         }
     }
 
-    private void sampleSignatureTest() {
+    /**
+     * A quick sample for sign and verification
+     */
+    private static void sampleSignatureTest() {
         try {
-            byte[] signature = signatureHelper.sign(new String("hello").getBytes());
+            String signature = signatureHelper.sign(new String("hello").getBytes());
             System.out.println("verification result = " +
                     signatureHelper.verify(new String("hello").getBytes(), signature));
         } catch (SignatureException e) {
             e.printStackTrace();
         } catch (InvalidKeyException e) {
             e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 
-    private static CompositeIdentityObject buildRecipient() {
-        CompositeIdentityObject recipient = new CompositeIdentityObject();
-        recipient.setType(new String[]{"urn"});
-        recipient.setHashed(false);
-        recipient.setIdentity("urn:in.gov.gstn.id:Z000000000000001");
-        recipient.setName("Government Industrial Training Institute, Salboni");
-        return recipient;
+    /**
+     * Loads the JSON-LD context
+     * @throws IOException
+     */
+    private static void initContext() throws IOException {
+        ClassLoader classLoader = Main.class.getClassLoader();
+        File file = new File(classLoader.getResource(CONTEXT_FILE_NAME).getFile());
+
+        if (file == null) {
+            throw new IOException("Context file not found");
+        }
+
+        context = DOMAIN + "/" + CONTEXT_FILE_NAME;
+        System.out.println("Context file Found : " + file.exists());
     }
 
-    private static BadgeClass buildBadge() {
-        BadgeClass badgeClass = new BadgeClass();
-        badgeClass.setId("https://dgt.example.gov.in/certs/iti/grading/appreciate");
-        badgeClass.setName("Certificate of Appreciation");
-        badgeClass.setDescription("Certificate of Appreciation in National Level ITI Grading");
-        badgeClass.setImage("data:image/png;base64,<base64-encoded-png-data>");
-
-        Criteria criteria = new Criteria();
-        criteria.setNarrative("For exhibiting outstanding performance");
-
-        badgeClass.setCriteria(criteria);
-        badgeClass.setIssuer("https://certs.example.gov/o/dgt/HJ5327VB1247G");
-        return badgeClass;
+    private static void initBuilders() {
+        sampleBuilders = new SampleBuilders(context);
     }
 
-    public static void main(String[] args) {
-        initializeKeys();
-        initSignatureHelper();
+    /**
+     * Validates if the certificate input is un-tampered against the given signature
+     * @param certificate
+     * @param signatureValue
+     * @return
+     */
+    public static boolean verifySignature(String certificate, String signatureValue) {
+        boolean isValid = false;
+        try {
+            isValid = signatureHelper.verify(certificate.getBytes(),
+                    signatureValue);
+            System.out.println("Certificate isValid : " + isValid);
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (SignatureException e) {
+            e.printStackTrace();
+        }
+        return isValid;
+    }
 
-        CertificateExtension certificate = new CertificateExtension();
-        certificate.setId("tag:msde.gov.in,2015-02-27:dgt.certificate/1800122349");
-
-        certificate.setRecipient(buildRecipient());
-        certificate.setBadge(buildBadge());
-
+    /**
+     * Sets the dates - issued on and expiry
+     * @param certificate
+     */
+    private static void setDates(CertificateExtension certificate) {
         // Set date limits
         String nowDt = Instant.now().toString();
         certificate.setIssuedOn(Instant.now().toString());
@@ -152,25 +187,42 @@ public class Main {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.YEAR, 2);
         certificate.setExpires(dateFormatGmt.format(calendar.getTime()));
+    }
 
-        AssessedEvidence evidence = new AssessedEvidence();
-        evidence.setId("urn:uuid:02644c88-d2b7-41ef-a78c-6adf7fbdb268");
-        evidence.setDescription("Rank in National ITI Grading");
+    public static void main(String[] args) throws IOException {
+        initContext();
+        initBuilders();
+        initializeKeys();
+        initSignatureHelper();
 
+        CertificateExtension certificate = new CertificateExtension(context);
+        certificate.setId("tag:msde.gov.in,2015-02-27:dgt.certificate/1800122349");
+        certificate.setRecipient(sampleBuilders.buildRecipient());
+        certificate.setBadge(sampleBuilders.buildBadge());
+        setDates(certificate);
+        certificate.setEvidence(sampleBuilders.buildEvidence());
 
-        // TODO - set assessment and signature.
-        //evidence.setAssessment();
+        // Mark that this is signed badge (not hosted verification)
+        SignedVerification signedVerification = new SignedVerification();
+        certificate.setVerification(signedVerification);
+        certificate.setSignatory(new String[]{"https://example.com/dgt/1"});
 
-        certificate.setEvidence(evidence);
+        // Sign the certificate - whatever that has built so far
+        String toSignCertificate = certificate.toString();
+        String signatureValue = null;
+        try {
+            signatureValue = signatureHelper.sign(toSignCertificate.getBytes());
+        } catch (SignatureException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        }
+        certificate.setSignature(sampleBuilders.buildSignature(signatureValue));
 
+        // Prints the certificate in json format
+        // System.out.println(certificate.toString());
 
-        certificate.setAwardedThrough("PMKYY");
-
-        certificate.setExpires(null);
-        certificate.setId("http://mydomain/certs/1");
-        certificate.setIssuedOn(nowDt);
-        certificate.setNarrative("Certified for level-1 carpentry");
-
-        System.out.println(certificate.toString());
+        // Verify the signature
+        verifySignature(toSignCertificate, signatureValue);
     }
 }

@@ -36,7 +36,6 @@
     "description": "Rank in National ITI Grading",
     "assessment": {
       "type": [
-        "Assessment",
         "Extension",
         "extensions:RankAssessment"
       ],
@@ -47,7 +46,7 @@
     "assessedOn": "2018-08-19T6:30:00Z"
   },
   "verification": {
-    "type": "LinkedDataSignatures"
+    "type": "SignedBadge"
   },
   "signatory": [
     "https://example.com/dgt/1"

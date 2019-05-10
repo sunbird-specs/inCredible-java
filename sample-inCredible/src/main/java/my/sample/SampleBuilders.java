@@ -10,10 +10,10 @@ import org.incredible.pojos.ob.Evidence;
 
 import java.time.Instant;
 
-public class Builders {
+public class SampleBuilders {
     private String context;
 
-    public Builders(String context) {
+    public SampleBuilders(String context) {
         this.context = context;
     }
 
