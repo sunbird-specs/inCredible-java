@@ -17,9 +17,10 @@ public class TrainingEvidence extends Evidence {
      */
     private String session;
 
-    public TrainingEvidence() {
+    public TrainingEvidence(String ctx) {
         String[] type = new String[]{"Evidence", "Extension", "extensions:TrainingEvidence"};
         setType(type);
+        setContext(ctx);
     }
 
     public String getSubject() {

@@ -7,20 +7,20 @@ public class VerificationObject extends OBBase {
      * The type of verification method. Supported values for single assertion verification are HostedBadge and
      * SignedBadge (aliases in context are available: hosted and signed)
      */
-    protected List<String> type;
+    private String[] type;
 
     /**
      * The @id of the property to be used for verification that an Assertion is within the allowed scope. Only id is
      * supported. Verifiers will consider id the default value if verificationProperty is omitted or if an issuer
      * Profile has no explicit verification instructions, so it may be safely omitted.
      */
-    protected String verificationProperty;
+    private String verificationProperty;
 
     /**
      * The URI fragment that the verification property must start with. Valid Assertions must have an id within this
      * scope. Multiple values allowed, and Assertions will be considered valid if their id starts with one of these values.
      */
-    protected String startsWith;
+    private String startsWith;
 
     /**
      * The host registered name subcomponent of an allowed origin. Any given id URI will be considered valid.
@@ -29,11 +29,13 @@ public class VerificationObject extends OBBase {
      */
     protected List<String> allowedOrigins;
 
-    public List<String> getType() {
+    public VerificationObject() {}
+
+    public String[] getType() {
         return type;
     }
 
-    public void setType(List<String> type) {
+    public void setType(String[] type) {
         this.type = type;
     }
 

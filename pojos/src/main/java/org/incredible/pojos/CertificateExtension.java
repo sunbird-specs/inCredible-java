@@ -35,13 +35,12 @@ public class CertificateExtension extends Assertion {
     /**
      * The signature value (hash typically generated using private key)
      */
-    private String signature;
+    private Signature signature;
 
-    private static final ObjectMapper mapper = new ObjectMapper();
-
-    public CertificateExtension() {
+    public CertificateExtension(String ctx) {
         String[] type = new String[]{"Assertion", "Extension", "extensions:CertificateExtension"};
         setType(type);
+        setContext(ctx);
     }
 
     public String getAwardedThrough() {
@@ -76,22 +75,11 @@ public class CertificateExtension extends Assertion {
         this.validFrom = validFrom;
     }
 
-    public String getSignature() {
+    public Signature getSignature() {
         return signature;
     }
 
-    public void setSignature(String signature) {
+    public void setSignature(Signature signature) {
         this.signature = signature;
-    }
-
-    @Override
-    public String toString() {
-        String stringRep = null;
-        try {
-            stringRep = mapper.writeValueAsString(this);
-        } catch (JsonProcessingException jpe) {
-            jpe.printStackTrace();
-        }
-        return stringRep;
     }
 }

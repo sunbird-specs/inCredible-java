@@ -1,14 +1,14 @@
 package org.incredible.pojos.ob;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 public class CryptographicKey extends OBBase {
-    private static final ObjectMapper mapper = new ObjectMapper();
     private String[] type = new String[]{"CryptographicKey"};
     private String id;
     private String owner;
     private String publicKeyPem;
+
+    public CryptographicKey(String ctx) {
+        setContext(ctx);
+    }
 
     public String[] getType() {
         return type;
@@ -40,16 +40,5 @@ public class CryptographicKey extends OBBase {
 
     public void setPublicKeyPem(String publicKeyPem) {
         this.publicKeyPem = publicKeyPem;
-    }
-
-    @Override
-    public String toString() {
-        String stringRep = null;
-        try {
-            stringRep = mapper.writeValueAsString(this);
-        } catch (JsonProcessingException jpe) {
-            jpe.printStackTrace();
-        }
-        return stringRep;
     }
 }

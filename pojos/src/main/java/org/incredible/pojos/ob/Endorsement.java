@@ -30,6 +30,10 @@ public class Endorsement extends OBBase {
      */
     private VerificationObject verification;
 
+    public Endorsement(String ctx) {
+        setContext(ctx);
+    }
+
     public String getId() {
         return id;
     }

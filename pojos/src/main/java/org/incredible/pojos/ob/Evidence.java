@@ -37,6 +37,12 @@ public class Evidence extends OBBase {
      */
     private String audience;
 
+    protected Evidence() {}
+
+    public Evidence(String ctx) {
+        setContext(ctx);
+    }
+
     public String getId() {
         return id;
     }

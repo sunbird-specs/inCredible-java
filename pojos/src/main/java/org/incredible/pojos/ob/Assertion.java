@@ -55,6 +55,12 @@ public class Assertion extends OBBase {
      */
     private String revocationReason;
 
+    protected Assertion() {}
+
+    public Assertion(String ctx) {
+        setContext(ctx);
+    }
+
     public String getId() {
         return id;
     }

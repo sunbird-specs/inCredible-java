@@ -40,6 +40,10 @@ public class BadgeClass extends OBBase {
 
     private AlignmentObject alignment;
 
+    public BadgeClass(String ctx) {
+        setContext(ctx);
+    }
+
     public String getId() {
         return id;
     }

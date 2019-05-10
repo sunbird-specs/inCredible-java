@@ -22,18 +22,19 @@ public class AssessedEvidence extends Evidence {
     private String assessedBy;
 
     /**
-     * Date when the assessment was conducted
+     * DateTime when the assessment was conducted
      */
-    private Date assessedOn;
+    private String assessedOn;
 
     /**
      * Signature value typically a hash generated using private key of the assessedBy
      */
     private String signature;
 
-    public AssessedEvidence() {
+    public AssessedEvidence(String ctx) {
         String[] type = new String[]{"Evidence", "Extension", "extensions:AssessedEvidence"};
         setType(type);
+        setContext(ctx);
     }
 
     public String getSubject() {
@@ -60,11 +61,11 @@ public class AssessedEvidence extends Evidence {
         this.assessedBy = assessedBy;
     }
 
-    public Date getAssessedOn() {
+    public String getAssessedOn() {
         return assessedOn;
     }
 
-    public void setAssessedOn(Date assessedOn) {
+    public void setAssessedOn(String assessedOn) {
         this.assessedOn = assessedOn;
     }
 

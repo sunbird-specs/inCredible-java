@@ -24,9 +24,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <!--<configuration>-->
-                <!--<finalName>pojos</finalName>-->
-                <!--</configuration>-->
             </plugin>
         </plugins>
     </build>

@@ -16,6 +16,11 @@ public class MarksAssessment extends Assessment {
      */
     private float passValue;
 
+    public MarksAssessment() {
+        String[] type = new String[] {"Extension", "extensions:MarksAssessment"};
+        setType(type);
+    }
+
     public float getMinValue() {
         return minValue;
     }

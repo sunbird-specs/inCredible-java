@@ -1,8 +1,14 @@
 package org.incredible.pojos;
 
-public class Assessment {
+import org.incredible.pojos.ob.OBBase;
+
+public class Assessment extends OBBase {
     private String[] type;
     private float value;
+
+    public Assessment() {
+        type = new String[] {"Extension", "extensions:Assessment"};
+    }
 
     public String[] getType() {
         return type;

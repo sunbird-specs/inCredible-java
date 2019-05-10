@@ -26,4 +26,44 @@ public class AlignmentObject extends OBBase {
      * alignment target within its framework and/or targetUrl
      */
     private String targetCode;
+
+    public String getTargetName() {
+        return targetName;
+    }
+
+    public void setTargetName(String targetName) {
+        this.targetName = targetName;
+    }
+
+    public String getTargetURL() {
+        return targetURL;
+    }
+
+    public void setTargetURL(String targetURL) {
+        this.targetURL = targetURL;
+    }
+
+    public String getTargetDescription() {
+        return targetDescription;
+    }
+
+    public void setTargetDescription(String targetDescription) {
+        this.targetDescription = targetDescription;
+    }
+
+    public String getTargetFramework() {
+        return targetFramework;
+    }
+
+    public void setTargetFramework(String targetFramework) {
+        this.targetFramework = targetFramework;
+    }
+
+    public String getTargetCode() {
+        return targetCode;
+    }
+
+    public void setTargetCode(String targetCode) {
+        this.targetCode = targetCode;
+    }
 }
