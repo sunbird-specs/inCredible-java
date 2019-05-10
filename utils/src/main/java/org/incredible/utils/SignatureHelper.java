@@ -1,5 +1,8 @@
 package org.incredible.utils;
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
@@ -20,16 +23,18 @@ public class SignatureHelper {
         this.keyPair = keyPair;
     }
 
-    public byte[] sign(byte[] data) throws SignatureException, InvalidKeyException {
+    public String sign(byte[] data) throws SignatureException, InvalidKeyException, UnsupportedEncodingException {
         // After doing a sign, the keys are going to be reset. So do this everytime.
         signature.initSign(keyPair.getPrivate());
         signature.update(data);
-        return signature.sign();
+        byte[] signed = signature.sign();
+        return Base64.encode(signed);
     }
 
-    public boolean verify(byte[] data, byte[] signatureData) throws InvalidKeyException, SignatureException {
+    public boolean verify(byte[] data, String signatureData) throws InvalidKeyException, SignatureException {
         signature.initVerify(keyPair.getPublic());
         signature.update(data);
-        return signature.verify(signatureData);
+        byte[] decodedSignature = new Base64().decode(signatureData);
+        return signature.verify(decodedSignature);
     }
 }
