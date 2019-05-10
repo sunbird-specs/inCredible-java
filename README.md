@@ -18,5 +18,5 @@ To build the pojos and utilities
 > mvn clean install
 
 Optionally, to build the sample
->cd sample-inCredible
->javac -cp ../pojos/target/pojos-1.0-SNAPSHOT.jar src/Main.java
+> cd sample-inCredible <br>
+> mvn clean install
