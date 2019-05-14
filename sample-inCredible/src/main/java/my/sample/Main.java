@@ -220,7 +220,7 @@ public class Main {
         certificate.setSignature(sampleBuilders.buildSignature(signatureValue));
 
         // Prints the certificate in json format
-        // System.out.println(certificate.toString());
+        System.out.println(certificate.toString());
 
         // Verify the signature
         verifySignature(toSignCertificate, signatureValue);
