@@ -1,7 +1,6 @@
 package my.sample;
 
 import org.incredible.pojos.CertificateExtension;
-
 import org.incredible.pojos.ob.SignedVerification;
 import org.incredible.utils.KeyGenerator;
 import org.incredible.utils.SignatureHelper;

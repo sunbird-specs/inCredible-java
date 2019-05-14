@@ -2,8 +2,6 @@ package org.incredible.pojos;
 
 import org.incredible.pojos.ob.Evidence;
 
-import java.util.Date;
-
 public class AssessedEvidence extends Evidence {
     /**
      * Subject of the evidence
@@ -27,9 +25,9 @@ public class AssessedEvidence extends Evidence {
     private String assessedOn;
 
     /**
-     * Signature value typically a hash generated using private key of the assessedBy
+     * Signature
      */
-    private String signature;
+    private Signature signature;
 
     public AssessedEvidence(String ctx) {
         String[] type = new String[]{"Evidence", "Extension", "extensions:AssessedEvidence"};
@@ -69,11 +67,11 @@ public class AssessedEvidence extends Evidence {
         this.assessedOn = assessedOn;
     }
 
-    public String getSignature() {
+    public Signature getSignature() {
         return signature;
     }
 
-    public void setSignature(String signature) {
+    public void setSignature(Signature signature) {
         this.signature = signature;
     }
 }

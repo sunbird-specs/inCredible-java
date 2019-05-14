@@ -1,6 +1,5 @@
 package my.sample;
 
-import com.sun.javafx.logging.PulseLogger;
 import org.bouncycastle.openssl.PEMWriter;
 
 import java.io.FileOutputStream;
