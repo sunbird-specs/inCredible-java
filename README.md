@@ -3,10 +3,10 @@
 Placeholder for POJOs and utility functions based on the inCredible specification
 
 ## Modules
-pojos
+helpers/pojos
 - All the pojos related to the spec
 
-utils
+helpers/utils
 - Utility functions for signing, verification
 
 sample-inCredible
@@ -15,6 +15,7 @@ sample-inCredible
 
 ## Installation
 To build the pojos and utilities
+> cd helpers <br>
 > mvn clean install
 
 Optionally, to build the sample

@@ -10,12 +10,12 @@
     <packaging>pom</packaging>
     <description>POJOs and utilities for the inCredible spec v1.0</description>
     <modules>
-        <module>utils</module>
         <module>pojos</module>
+        <module>utils</module>
     </modules>
 
     <properties>
-        <jackson.version>2.9.8</jackson.version>
+        <jackson.version>2.9.9</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -26,6 +26,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
