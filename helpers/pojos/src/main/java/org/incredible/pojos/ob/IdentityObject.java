@@ -1,5 +1,6 @@
 package org.incredible.pojos.ob;
 
+
 public class IdentityObject extends OBBase {
     /**
      * Value of the annotation

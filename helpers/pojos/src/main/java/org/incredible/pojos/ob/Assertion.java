@@ -2,6 +2,10 @@ package org.incredible.pojos.ob;
 
 
 import org.incredible.pojos.CompositeIdentityObject;
+import org.incredible.pojos.ob.exeptions.InvalidDateFormatException;
+import org.incredible.pojos.ob.valuator.ExpiryDateValuator;
+import org.incredible.pojos.ob.valuator.IssuedDateValuator;
+
 
 /**
  * Exactly per OpenBadges v2 specification
@@ -55,7 +59,8 @@ public class Assertion extends OBBase {
      */
     private String revocationReason;
 
-    protected Assertion() {}
+    protected Assertion() {
+    }
 
     public Assertion(String ctx) {
         setContext(ctx);
@@ -81,8 +86,14 @@ public class Assertion extends OBBase {
         return issuedOn;
     }
 
-    public void setIssuedOn(String issuedOn) {
-        this.issuedOn = issuedOn;
+    public void setIssuedOn(String issuedOn) throws InvalidDateFormatException {
+
+        IssuedDateValuator issuedDateValuator = new IssuedDateValuator();
+        if (issuedDateValuator.evaluates(issuedOn) == null) {
+            throw new InvalidDateFormatException("Issued date is not in a given format");
+        } else
+            this.issuedOn = issuedDateValuator.evaluates(issuedOn);
+
     }
 
     public CompositeIdentityObject getRecipient() {
@@ -121,8 +132,16 @@ public class Assertion extends OBBase {
         return expires;
     }
 
-    public void setExpires(String expires) {
-        this.expires = expires;
+    public void setExpires(String expires) throws InvalidDateFormatException {
+
+        //todo remove IllegalArgumentException : done
+        ExpiryDateValuator valuator = new ExpiryDateValuator(this.getIssuedOn());
+        if (valuator.evaluates(expires) == null) {
+            throw new InvalidDateFormatException("Expiry date is in wrong format");
+        } else
+            this.expires = valuator.evaluates(expires);
+
+
     }
 
     public VerificationObject getVerification() {

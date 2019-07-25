@@ -9,7 +9,7 @@ public class SignedVerification extends VerificationObject {
     private String creator;
 
     public SignedVerification() {
-        String[] type = new String[]{"SignedBadge"};
+        String[] type = new String[]{"hosted"};
         setType(type);
     }
 
