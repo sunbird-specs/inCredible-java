@@ -42,7 +42,6 @@ public class BadgeClass extends OBBase {
      */
 
 
-    //todo make this an object
     private Issuer issuer;
 
     private AlignmentObject alignment;

@@ -134,7 +134,6 @@ public class Assertion extends OBBase {
 
     public void setExpires(String expires) throws InvalidDateFormatException {
 
-        //todo remove IllegalArgumentException : done
         ExpiryDateValuator valuator = new ExpiryDateValuator(this.getIssuedOn());
         if (valuator.evaluates(expires) == null) {
             throw new InvalidDateFormatException("Expiry date is in wrong format");
