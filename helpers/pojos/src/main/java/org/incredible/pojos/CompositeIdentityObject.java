@@ -32,14 +32,14 @@ public class CompositeIdentityObject extends IdentityObject {
     private String tag;
 
     /**
-     *  Uniform resource name
-     *  Required in the absence of URL
+     * Uniform resource name
+     * Required in the absence of URL
      */
     private String urn;
 
     /**
-     *  Uniform resource locator
-     *  Required in the absence of URN
+     * Uniform resource locator
+     * Required in the absence of URN
      */
     private String url;
 

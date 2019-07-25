@@ -1,10 +1,14 @@
 package org.incredible.pojos.ob;
 
+
 public class BadgeClass extends OBBase {
     /**
      * Unique IRI for the badge - HTTP URL or URN
      */
     private String id;
+
+    public BadgeClass() {
+    }
 
     /**
      * In most cases, this will simply be the string BadgeClass. An array including BadgeClass and other string
@@ -36,7 +40,9 @@ public class BadgeClass extends OBBase {
     /**
      * HTTP URL to the issuer of this credential - Profile
      */
-    private String issuer;
+
+
+    private Issuer issuer;
 
     private AlignmentObject alignment;
 
@@ -102,11 +108,11 @@ public class BadgeClass extends OBBase {
         this.criteria = criteria;
     }
 
-    public String getIssuer() {
+    public Issuer getIssuer() {
         return issuer;
     }
 
-    public void setIssuer(String issuer) {
+    public void setIssuer(Issuer issuer) {
         this.issuer = issuer;
     }
 

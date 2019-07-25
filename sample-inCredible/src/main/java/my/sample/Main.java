@@ -1,7 +1,9 @@
 package my.sample;
 
 import org.incredible.pojos.CertificateExtension;
+import org.incredible.pojos.ob.Issuer;
 import org.incredible.pojos.ob.SignedVerification;
+import org.incredible.pojos.ob.exeptions.InvalidDateFormatException;
 import org.incredible.utils.KeyGenerator;
 import org.incredible.utils.SignatureHelper;
 
@@ -21,10 +23,10 @@ import java.util.Date;
  * A demonstration of how inCredible specification can be realized
  * in JAVA.
  * Depends on the following jar files:
- *  1. org.incredible.pojos - Plain object with getters and setters
- *  2. org.incredible.utils - Encryption and Signature along with Key utilities
- *  The keys are generally preserved in a database for permanence. In this
- *  demonstration, we store it in local file system as plain files.
+ * 1. org.incredible.pojos - Plain object with getters and setters
+ * 2. org.incredible.utils - Encryption and Signature along with Key utilities
+ * The keys are generally preserved in a database for permanence. In this
+ * demonstration, we store it in local file system as plain files.
  */
 public class Main {
     /**
@@ -132,6 +134,7 @@ public class Main {
 
     /**
      * Loads the JSON-LD context
+     *
      * @throws IOException
      */
     private static void initContext() throws IOException {
@@ -142,7 +145,7 @@ public class Main {
             throw new IOException("Context file not found");
         }
 
-        context = DOMAIN + "/" + CONTEXT_FILE_NAME;
+        context = DOMAIN + "/" + "_schemas/context.json";
         System.out.println("Context file Found : " + file.exists());
     }
 
@@ -152,6 +155,7 @@ public class Main {
 
     /**
      * Validates if the certificate input is un-tampered against the given signature
+     *
      * @param certificate
      * @param signatureValue
      * @return
@@ -172,20 +176,26 @@ public class Main {
 
     /**
      * Sets the dates - issued on and expiry
+     *
      * @param certificate
      */
     private static void setDates(CertificateExtension certificate) {
         // Set date limits
         String nowDt = Instant.now().toString();
-        certificate.setIssuedOn(Instant.now().toString());
+        try {
+            certificate.setIssuedOn(Instant.now().toString());
+            SimpleDateFormat dateFormatGmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            certificate.setValidFrom(dateFormatGmt.format(Date.from(Instant.now())));
 
-        SimpleDateFormat dateFormatGmt = new SimpleDateFormat("yyyy-MM-dd");
-        certificate.setValidFrom(dateFormatGmt.format(Date.from(Instant.now())));
+            // The certificate is set to expire after 2 years.
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.YEAR, 2);
+            certificate.setExpires(dateFormatGmt.format(calendar.getTime()));
+        } catch (InvalidDateFormatException e) {
+            e.printStackTrace();
+        }
 
-        // The certificate is set to expire after 2 years.
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.YEAR, 2);
-        certificate.setExpires(dateFormatGmt.format(calendar.getTime()));
+
     }
 
     public static void main(String[] args) throws IOException {
@@ -195,7 +205,7 @@ public class Main {
         initSignatureHelper();
 
         CertificateExtension certificate = new CertificateExtension(context);
-        certificate.setId("tag:msde.gov.in,2015-02-27:dgt.certificate/1800122349");
+        certificate.setId("http://localhost:8080/_schemas/SampleCertificate.json");
         certificate.setRecipient(sampleBuilders.buildRecipient());
         certificate.setBadge(sampleBuilders.buildBadge());
         setDates(certificate);
@@ -203,8 +213,10 @@ public class Main {
 
         // Mark that this is signed badge (not hosted verification)
         SignedVerification signedVerification = new SignedVerification();
+        Issuer issuer = new Issuer(context);
+        issuer.setUrl("http:");
         certificate.setVerification(signedVerification);
-        certificate.setSignatory(new String[]{"https://example.com/dgt/1"});
+        certificate.setSignatory(new Issuer[]{issuer});
 
         // Sign the certificate - whatever that has built so far
         String toSignCertificate = certificate.toString();

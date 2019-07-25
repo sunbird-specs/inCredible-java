@@ -7,6 +7,7 @@ import org.incredible.pojos.Signature;
 import org.incredible.pojos.ob.BadgeClass;
 import org.incredible.pojos.ob.Criteria;
 import org.incredible.pojos.ob.Evidence;
+import org.incredible.pojos.ob.Issuer;
 
 import java.time.Instant;
 
@@ -28,7 +29,7 @@ public class SampleBuilders {
 
     public BadgeClass buildBadge() {
         BadgeClass badgeClass = new BadgeClass(context);
-        badgeClass.setId("https://dgt.example.gov.in/certs/iti/grading/appreciate");
+        badgeClass.setId("http://localhost:8080/_schemas/Badge.json");
         badgeClass.setName("Certificate of Appreciation");
         badgeClass.setDescription("Certificate of Appreciation in National Level ITI Grading");
         badgeClass.setImage("data:image/png;base64,<base64-encoded-png-data>");
@@ -37,13 +38,17 @@ public class SampleBuilders {
         criteria.setNarrative("For exhibiting outstanding performance");
 
         badgeClass.setCriteria(criteria);
-        badgeClass.setIssuer("https://certs.example.gov/o/dgt/HJ5327VB1247G");
+        Issuer issuer = new Issuer(context);
+        issuer.setId("http://localhost:8080/_schemas/Issuer.json");
+        issuer.setUrl("https://www.niit.com");
+        issuer.setName("NIIT");
+        badgeClass.setIssuer(issuer);
         return badgeClass;
     }
 
     public Evidence buildEvidence() {
-        AssessedEvidence evidence = new AssessedEvidence(context);
-        evidence.setId("urn:uuid:02644c88-d2b7-41ef-a78c-6adf7fbdb268");
+        AssessedEvidence evidence = new AssessedEvidence("http://localhost:8080/extensions/AssessedEvidence/context.json");
+        evidence.setId("http://localhost:8080/_schemas/SampleCertificate.json");
         evidence.setDescription("Rank in National ITI Grading");
 
         RankAssessment rankAssessment = new RankAssessment();

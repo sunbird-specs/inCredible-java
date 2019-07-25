@@ -7,7 +7,7 @@ public class RankAssessment extends Assessment {
     private float maxValue;
 
     public RankAssessment() {
-        String[] type = new String[] {"Extension", "extensions:RankAssessment"};
+        String[] type = new String[]{"Extension", "extensions:RankAssessment"};
         setType(type);
     }
 
