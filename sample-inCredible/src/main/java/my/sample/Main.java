@@ -205,7 +205,7 @@ public class Main {
         initSignatureHelper();
 
         CertificateExtension certificate = new CertificateExtension(context);
-        certificate.setId("http://localhost:8080/_schemas/SampleCertificate.json");
+        certificate.setId("http://localhost:8080/_schemas/CertificateSample.json");
         certificate.setRecipient(sampleBuilders.buildRecipient());
         certificate.setBadge(sampleBuilders.buildBadge());
         setDates(certificate);
@@ -213,8 +213,10 @@ public class Main {
 
         // Mark that this is signed badge (not hosted verification)
         SignedVerification signedVerification = new SignedVerification();
+        signedVerification.setCreator("http://localhost:8080/_schemas/publickey.json");
         Issuer issuer = new Issuer(context);
-        issuer.setUrl("http:");
+        issuer.setName("NIIT");
+        issuer.setUrl("https://www.niit.com");
         certificate.setVerification(signedVerification);
         certificate.setSignatory(new Issuer[]{issuer});
 

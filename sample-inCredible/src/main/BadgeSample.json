@@ -1,0 +1,12 @@
+{
+  "title": "badge",
+  "@context": "http://127.0.0.1:8080/Context.json",
+  "type": "BadgeClass",
+  "version": 1,
+  "id": "http://127.0.0.1:8080/BadgeSample.json",
+  "name": "Certificate of Completion",
+  "description": "Certificate of Completion",
+  "image": "https://pocdheeraj.azurewebsites.net/StaticFiles/Images/AddressBadge.png",
+  "criteria": "http://127.0.0.1:8080/Completion.html",
+  "issuer": "http://127.0.0.1:8080/IssueSample.json"
+}

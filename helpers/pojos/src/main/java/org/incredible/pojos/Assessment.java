@@ -6,9 +6,6 @@ public class Assessment extends OBBase {
     private String[] type;
     private float value;
 
-    public Assessment() {
-    }
-
     public Assessment(String ctx) {
         type = new String[]{"Extension", "extensions:Assessment"};
         setContext(ctx);
