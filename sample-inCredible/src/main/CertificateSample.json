@@ -34,8 +34,8 @@
       "type": [
         "Issuer"
       ],
-      "name": "NIIT",
-      "url": "https://www.niit.com"
+      "name": "company name",
+      "url": "https://www.company.com"
     },
     "@context": "http://localhost:8080/_schemas/context.json"
   },
@@ -73,8 +73,8 @@
       "type": [
         "Issuer"
       ],
-      "name": "NIIT",
-      "url": "https://www.niit.com"
+      "name": "company name",
+      "url": "https://www.company.com"
     }
   ],
   "validFrom": "2019-07-30T17:50:15Z",

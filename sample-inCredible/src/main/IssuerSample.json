@@ -2,9 +2,9 @@
   "@context": "http://127.0.0.1:8080/Context.json",
   "type": "Issuer",
   "id": "http://127.0.0.1:8080/IssuerSample.json",
-  "name": "NIIT Limited",
-  "image": "https://www.niit.com/india/training/PublishingImages/brands/NIIT.jpg",
-  "url": "https://www.niit.com",
-  "email": "niit@gmail.com",
+  "name": "your company",
+  "image": "http://companyImage.jpg",
+  "url": "https://www.company.com",
+  "email": "yourCompany@gmail.com",
   "publicKey": "http://127.0.0.1:8080/publickeySample.json"
 }

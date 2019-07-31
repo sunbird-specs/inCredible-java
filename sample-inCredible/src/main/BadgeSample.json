@@ -6,7 +6,7 @@
   "id": "http://127.0.0.1:8080/BadgeSample.json",
   "name": "Certificate of Completion",
   "description": "Certificate of Completion",
-  "image": "https://pocdheeraj.azurewebsites.net/StaticFiles/Images/AddressBadge.png",
+  "image": "http://sampleImage.png",
   "criteria": "http://127.0.0.1:8080/Completion.html",
   "issuer": "http://127.0.0.1:8080/IssueSample.json"
 }
