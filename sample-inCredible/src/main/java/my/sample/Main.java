@@ -215,8 +215,8 @@ public class Main {
         SignedVerification signedVerification = new SignedVerification();
         signedVerification.setCreator("http://localhost:8080/_schemas/publickey.json");
         Issuer issuer = new Issuer(context);
-        issuer.setName("NIIT");
-        issuer.setUrl("https://www.niit.com");
+        issuer.setName("your company");
+        issuer.setUrl("https://www.company.com");
         certificate.setVerification(signedVerification);
         certificate.setSignatory(new Issuer[]{issuer});
 

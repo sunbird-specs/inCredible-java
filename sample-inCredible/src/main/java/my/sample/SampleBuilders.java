@@ -40,8 +40,8 @@ public class SampleBuilders {
         badgeClass.setCriteria(criteria);
         Issuer issuer = new Issuer(context);
         issuer.setId("http://localhost:8080/_schemas/Issuer.json");
-        issuer.setUrl("https://www.niit.com");
-        issuer.setName("NIIT");
+        issuer.setUrl("https://www.company.com");
+        issuer.setName("company");
         badgeClass.setIssuer(issuer);
         return badgeClass;
     }
