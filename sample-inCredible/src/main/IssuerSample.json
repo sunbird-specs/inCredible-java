@@ -1,11 +1,10 @@
 {
-  "type": "AwardingBody",
-  "id": "https://certs.example.gov/o/dgt/HJ5327VB1247G",
-  "name": "Ministry of Skill Development and Entrepreneurship, Directorate General of Training",
-  "publicKey": {
-    "id": "https://dgt.example.gov.in/keys/awarding_body.json",
-    "type": "Key",
-    "owner": "https://certs.example.gov/o/dgt/HJ5327VB1247G",
-    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\n... ... ... ... ...\n-----END PUBLIC KEY-----\n"
-  }
+  "@context": "http://127.0.0.1:8080/Context.json",
+  "type": "Issuer",
+  "id": "http://127.0.0.1:8080/IssuerSample.json",
+  "name": "your company",
+  "image": "http://companyImage.jpg",
+  "url": "https://www.company.com",
+  "email": "yourCompany@gmail.com",
+  "publicKey": "http://127.0.0.1:8080/publickeySample.json"
 }

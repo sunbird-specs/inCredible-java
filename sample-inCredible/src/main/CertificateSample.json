@@ -1,61 +1,88 @@
 {
-  "id": "tag:msde.gov.in,2015-02-27:dgt.certificate/1800122349",
+  "id": "http://localhost:8080/_schemas/CertificateSample.json",
   "type": [
     "Assertion",
     "Extension",
-    "CertificateExtension"
+    "extensions:CertificateExtension"
   ],
+  "issuedOn": "2019-07-30T00:00:00Z",
   "recipient": {
-    "type": "urn",
-    "hashed": "false",
     "identity": "urn:in.gov.gstn.id:Z000000000000001",
+    "type": [
+      "urn"
+    ],
+    "hashed": false,
     "name": "Government Industrial Training Institute, Salboni"
   },
   "badge": {
-    "id": "https://dgt.example.gov.in/certs/iti/grading/appreciate",
-    "type": "BadgeClass",
-    "name": "Certificate of Appreciation in National Level ITI Grading",
-    "description": " ... ",
+    "id": "http://localhost:8080/_schemas/Badge.json",
+    "type": [
+      "BadgeClass"
+    ],
+    "name": "Certificate of Appreciation",
+    "description": "Certificate of Appreciation in National Level ITI Grading",
     "image": "data:image/png;base64,<base64-encoded-png-data>",
     "criteria": {
-      "type": "Criteria",
+      "type": [
+        "Criteria"
+      ],
       "narrative": "For exhibiting outstanding performance"
     },
-    "issuer": "https://certs.example.gov/o/dgt/HJ5327VB1247G"
+    "issuer": {
+      "context": "http://localhost:8080/_schemas/context.json",
+      "id": "http://localhost:8080/_schemas/Issuer.json",
+      "type": [
+        "Issuer"
+      ],
+      "name": "company name",
+      "url": "https://www.company.com"
+    },
+    "@context": "http://localhost:8080/_schemas/context.json"
   },
-  "issuedOn": "2018-09-05T10:21:43.087UTC",
-  "validFrom": "2018-09-01",
-  "expires": "2020-06",
   "evidence": {
+    "id": "http://localhost:8080/_schemas/SampleCertificate.json",
     "type": [
       "Evidence",
       "Extension",
-      "AssessedEvidence"
+      "extensions:AssessedEvidence"
     ],
-    "id": "urn:uuid:02644c88-d2b7-41ef-a78c-6adf7fbdb268",
     "description": "Rank in National ITI Grading",
     "assessment": {
       "type": [
         "Extension",
         "extensions:RankAssessment"
       ],
-      "value": "8",
-      "maxValue": "1"
+      "value": 8.0,
+      "maxValue": 1.0
     },
     "assessedBy": "https://dgt.example.gov.in/iti-assessor.json",
-    "assessedOn": "2018-08-19T6:30:00Z"
+    "assessedOn": "2019-07-30T12:20:15.533857Z",
+    "@context": "http://localhost:8080/extensions/AssessedEvidence/context.json"
   },
+  "expires": "2021-07-30T17:50:15Z",
   "verification": {
-    "type": "SignedBadge"
+    "type": [
+      "SignedBadge"
+    ],
+    "creator": "http://localhost:8080/_schemas/publickey.json"
   },
+  "revoked": false,
   "signatory": [
-    "https://example.com/dgt/1"
+    {
+      "context": "http://localhost:8080/_schemas/context.json",
+      "type": [
+        "Issuer"
+      ],
+      "name": "company name",
+      "url": "https://www.company.com"
+    }
   ],
+  "validFrom": "2019-07-30T17:50:15Z",
   "signature": {
     "type": "LinkedDataSignature2015",
     "creator": "https://dgt.example.gov.in/keys/awarding_body.json",
-    "created": "2018-10-23T20:21:34Z",
-    "signatureValue": "OGQzNGVkMzVmMmQ3ODIyYzI4ZDY3NjI4NTIyZTk="
-  }
+    "created": "2019-07-30T12:20:15.699993Z",
+    "signatureValue": "KcH5RIsoozF1wcrXZGqRPmptXX22vU0MQr0ptWWdIKhf6J43le/JnZmBrNb6E/1MxZT9Km0wwfU2ZNYOyAft26kGykqcFoZAZnpFN6cI0xSXwDS7h+pLWWJrXf0cRpyPwlc5gNLYtyTrUop70EVzPcOjSflUrvQx5QL7SFJawCpE1+4nsLM13xI03Qme0hLHZdoaQBKOOHhLzr6bipffsti6lxj6XsC7JikTmM6MHzu4/podYDHwOxhe03Szl8/KXdrEcjIey8q18nCDtvEQ72T/RphX5VFhXr5MRyi/bLvA1+/RLs7s65C4QK+2ZV1pK0Y4/i32F5dDYu+bfnYM3g=="
+  },
+  "@context": "http://localhost:8080/_schemas/context.json"
 }
-
